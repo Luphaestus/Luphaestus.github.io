@@ -12,30 +12,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Add click event listener to each box
   boxes.forEach((box, index) => {
-    box.addEventListener("click", () => {
-      removeBoxes(index);
+    box.addEventListener("click", (event) => {
+      removeBoxes(event.clientX, event.clientY, index);
     });
   });
 
   // Function to remove boxes
-  function removeBoxes(index) {
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
+  function removeBoxes(mouseX, mouseY, index) {
     const distances = [];
 
-    // Calculate distance of each box from the mouse cursor
+    // Calculate distance of each box from the mouse position
     boxes.forEach((box, i) => {
       const rect = box.getBoundingClientRect();
       const boxX = rect.left + rect.width / 2;
       const boxY = rect.top + rect.height / 2;
-      const distance = Math.sqrt((boxX - centerX) ** 2 + (boxY - centerY) ** 2);
+      const distance = Math.sqrt((boxX - mouseX) ** 2 + (boxY - mouseY) ** 2);
       distances.push({ index: i, distance });
     });
 
     // Sort boxes based on distance
     distances.sort((a, b) => a.distance - b.distance);
 
-    // Remove boxes starting from the closest to the mouse cursor
+    // Remove boxes starting from the closest to the mouse position
     distances.forEach((obj, i) => {
       if (obj.index !== index) {
         setTimeout(() => {
