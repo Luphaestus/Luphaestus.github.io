@@ -13,12 +13,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Add click event listener to each box
   boxes.forEach((box, index) => {
     box.addEventListener("click", (event) => {
-      removeBoxes(event.clientX, event.clientY, index);
+      const clickedIndex = index;
+      const mouseX = event.clientX;
+      const mouseY = event.clientY;
+      toggleBoxVisibility(clickedIndex, mouseX, mouseY);
     });
   });
 
-  // Function to remove boxes
-  function removeBoxes(mouseX, mouseY, index) {
+  // Function to toggle box visibility and apply ripple effect
+  function toggleBoxVisibility(clickedIndex, mouseX, mouseY) {
     const distances = [];
 
     // Calculate distance of each box from the mouse position
@@ -33,11 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Sort boxes based on distance
     distances.sort((a, b) => a.distance - b.distance);
 
-    // Remove boxes starting from the closest to the mouse position
+    // Toggle visibility and apply ripple effect starting from the clicked box
+    let isVisible = true;
     distances.forEach((obj, i) => {
-      setTimeout(() => {
-        boxes[obj.index].style.backgroundColor = "transparent";
-      }, i * 50);
+      if (obj.index === clickedIndex || !isVisible) {
+        boxes[obj.index].style.backgroundColor = isVisible ? "transparent" : "black";
+        isVisible = !isVisible;
+      }
     });
   }
 });
