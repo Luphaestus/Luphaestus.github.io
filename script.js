@@ -35,11 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Remove boxes starting from the closest to the mouse position
     distances.forEach((obj, i) => {
-      if (obj.index !== index) {
-        setTimeout(() => {
-          boxes[obj.index].style.backgroundColor = "transparent";
-        }, i * 50);
-      }
+      setTimeout(() => {
+        boxes[obj.index].style.backgroundColor = "transparent";
+      }, i * 50);
     });
   }
 });
