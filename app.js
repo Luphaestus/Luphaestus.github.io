@@ -1,5 +1,5 @@
-let columns = Math.floor(document.body.clientWidth / 100) + 1;
-let rows = Math.floor(document.body.clientHeight / 100) + 1;
+let columns = Math.floor(document.body.clientWidth / (document.body.clientWidth*.08)) + 1;
+let rows = Math.floor(document.body.clientHeight /  (document.body.clientWidth*.08)) + 1;
 
 let toggled = false;
 
@@ -19,7 +19,7 @@ const tileClicked = (index) => {
   blob.style.opacity = targetOpacity;
 
   if (!toggled)
-  {
+{
     const menu = document.getElementById('menu');
     menu.style.zIndex =  0;
 
@@ -36,6 +36,10 @@ const tileClicked = (index) => {
     const itemahah = document.getElementById('menu-items');
     itemahah.style.opacity =toggled ? 1 : 0;
     itemahah.style.transition = `opacity ${!toggled ? 0.5 : 1.4}s ease`;
+
+    const menudecor = document.getElementById('menu-decorations');
+    menudecor.style.opacity =toggled ? 1 : 0;
+    menudecor.style.transition = `opacity ${!toggled ? 0.5 : 1.4}s ease`;
 
   anime({
     targets: ".tile",
@@ -79,8 +83,8 @@ createTiles(columns * rows);
 const createGird = () => {
   if(toggled) return
   tileWappper.innerHTML = "";
-  let newColumns = Math.floor(document.body.clientWidth / 100) + 1;
-  let newRows = Math.floor(document.body.clientHeight / 100) + 1;
+  let newColumns = Math.floor(document.body.clientWidth / (document.body.clientWidth*.08)) + 1;
+  let newRows = Math.floor(document.body.clientHeight /  (document.body.clientWidth*.08)) + 1;
   tileWappper.style.setProperty("--columns", newColumns);
   tileWappper.style.setProperty("--rows", newRows);
   createTiles(newColumns * newRows);
@@ -105,10 +109,37 @@ document.body.onpointermove = event => {
 
 
 const menu = document.getElementById("menu");
+const letters = "abcdefghijklmnopqrstuvwxyz";
+let iterations = 0
 
 Array.from(document.getElementsByClassName("menu-item"))
+
   .forEach((item, index) => {
-    item.onmouseover = () => {
+    item.onmouseover = event => {
       menu.dataset.activeIndex = index;
+      const interval = setInterval(() => {
+        event.target.innerText = event.target.innerText.split("")
+        .map((letter, index) =>
+        {
+          if(index < iterations)
+          {
+            return event.target.dataset.value[index];
+          }
+          return letters[Math.floor(Math.random() *26)];
+        })
+        .join("");
+
+        if (iterations >= event.target.dataset.value.length)
+        {
+          iterations=0
+          clearInterval(interval)
+        }
+
+        iterations+= (1 / 3);
+      }, 30);
     }
   })
+
+
+
+
