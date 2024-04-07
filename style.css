@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+
+:root {
+  --bg1: #ad5389;
+  --bg2: #3c1053;
+}
+
+@keyframes background-pan {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: -200% center;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+li {
+  margin: 0.5rem 0px;
+}
+
+body {
+  animation: background-pan 10s linear infinite;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  background-color: black;
+  background: linear-gradient(to right, var(--bg1), var(--bg2), var(--bg1));
+  background-size: 200%;
+}
+
+body.toggled {
+  animation: none;
+}
+
+body.toggled > #title {
+  opacity: 0;
+}
+
+.resume {
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  transition: opacity;
+  transition-duration: 1200ms;
+  max-width: 40rem;
+  margin: 0px auto;
+  padding: 1rem;
+  color: #eee;
+  font-family: "DM Sans", sans-serif;
+}
+
+body.toggled > .icon {
+  opacity: 1;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  height: calc(100vh - 1px);
+  width: calc(100vw - 1px);
+  position: relative;
+  z-index: 2;
+}
+
+.tile {
+  /* outline: 1px solid #ccc; */
+  cursor: pointer;
+  position: relative;
+}
+
+.tile:before {
+  background-color: rgb(15, 15, 15);
+  content: "";
+  inset: 0.5px;
+  position: absolute;
+}
+
+.tile:hover:before {
+  background-color: rgb(30, 30, 30);
+}
+
+#title {
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-size: clamp(2rem, 6vw, 6rem);
+  margin: 0px;
+  pointer-events: none;
+  transition: opacity 600ms ease;
+  z-index: 3;
+  text-align: center;
+}
+
+#title > .fancy {
+  color: var(--bg1);
+  font-family: "Dancing Script", cursive;
+  font-size: 1.5em;
+  line-height: 0.9em;
+}
+
+.centered {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1, 1.5);
+  }
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+#blur {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  backdrop-filter: blur(200px); /* Corrected typo */
+}
+
+.blob {
+  background-color: white;
+  height: 300px;
+  width: 300px; /* Set width to match height for a perfect circle */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  transform-origin: 50% 50%; /* Set transform origin to center */
+
+  background: linear-gradient(
+    to right,
+    aquamarine,
+    mediumpurple
+  );
+
+  animation: rotate 20s infinite;
+  filter: blur(200px); /* Apply blur effect to the .blob element */
+}
