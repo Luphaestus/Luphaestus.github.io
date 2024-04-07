@@ -30,7 +30,7 @@ li {
 }
 
 body {
-  animation: background-pan 10s linear infinite;
+  animation: background-pan 6s linear infinite;
   margin: 0;
   height: 100vh;
   overflow: hidden;
@@ -41,10 +41,6 @@ body {
 
 body.toggled {
   animation: none;
-}
-
-body.toggled > #title {
-  opacity: 0;
 }
 
 .resume {
@@ -75,7 +71,7 @@ body.toggled > .icon {
 }
 
 .tile {
-  /* outline: 1px solid #ccc; */
+
   cursor: pointer;
   position: relative;
 }
@@ -121,31 +117,23 @@ body.toggled > .icon {
     transform: rotate(0deg) scale(1);
   }
   50% {
-    transform: rotate(180deg) scale(1, 1.5);
+    transform: rotate(180deg) scale(1, 2);
   }
   to {
     transform: rotate(360deg) scale(1);
   }
 }
 
-#blur {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  z-index: 2;
-  backdrop-filter: blur(200px); /* Corrected typo */
-}
-
 .blob {
   background-color: white;
   height: 300px;
-  width: 300px; /* Set width to match height for a perfect circle */
+  width: 300px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  transform-origin: 50% 50%; /* Set transform origin to center */
+  transform-origin: 50% 50%;
 
   background: linear-gradient(
     to right,
@@ -154,5 +142,114 @@ body.toggled > .icon {
   );
 
   animation: rotate 20s infinite;
-  filter: blur(200px); /* Apply blur effect to the .blob element */
+  filter: blur(200px);
+}
+
+
+#menu {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 5%;
+  left: clamp(4rem, 10vw, 48rem);
+  z-index: 0;
+}
+
+.menu-item {
+  color:white;
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-family: "Ibarra Real Nova", serif;
+
+  display: block;
+  text-decoration: none;
+  padding: clamp(0.25rem, 0.5vw, 1rem) 0rem;
+  transition: opacity 400ms ease;
+
+
+
+}
+
+#menu-items:hover  > .menu-item {
+  opacity: .3;
+
+}
+
+#menu-items:hover > .menu-item:hover {
+  opacity:1;
+}
+
+#menu-background-pattern {
+  height: 100vh;
+  width: 100vw;
+
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.1) 9%,
+    transparent 9%
+  );
+
+  background-position: 0% 0%;
+  background-size: 12vmin 12vmin;
+
+  transition: background-position 400ms ease;
+
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#menu-items {
+  z-index: 1002;
+    opacity: 0;
+
+}
+
+#menu[data-active-index="0"] > #menu-background-pattern {
+  background-position: 0% -25%;
+}
+#menu[data-active-index="1"] > #menu-background-pattern {
+  background-position: 0% -50%;
+}
+#menu[data-active-index="2"] > #menu-background-pattern {
+  background-position: 0% -75%;
+}
+#menu[data-active-index="3"] > #menu-background-pattern {
+  background-position: 0% -100%;
+}
+
+#menu-background-image {
+  height: 100%;
+  width: 100%;
+  background-image: url(https://static1.anpoimages.com/wordpress/wp-content/uploads/2020/09/15/note20-cases-11-scaled.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background-position: center 40%;
+  background-size: 150vmax;
+  opacity: 0.15;
+  transition: opacity 400ms ease, background-position 400ms ease, background-size 400ms ease; /* Combine all transitions into one */
+  pointer-events: none;
+}
+
+#menu-items:hover ~ #menu-background-image {
+  background-size: 130vmax;
+  opacity: 0.1;
+}
+
+
+
+#menu[data-active-index="0"] > #menu-background-image {
+  background-position: center 25%;
+}
+#menu[data-active-index="1"] > #menu-background-image {
+  background-position: center 50%;
+}
+#menu[data-active-index="2"] > #menu-background-image {
+  background-position: center 75%;
+}
+#menu[data-active-index="3"] > #menu-background-image {
+  background-position: center 100%;
 }
