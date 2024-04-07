@@ -139,9 +139,44 @@ body.toggled > .icon {
   left: -6%;
   position: absolute;
   top: 2%;
-  transform: translate(0.00000%, 2%);
   scale: 0.5;
 }
+
+#menuclose {
+  right: 4%;
+  position: absolute;
+  top: 2%;
+  scale: 0.5;
+  font-weight: 400;
+  display: flex; /* Set the display property to flex */
+  align-items: center; /* Align items vertically in the center */
+}
+
+
+#menuclose #rsquare {
+    margin-left: 4vw; /* Add margin to the left of the <svg> icon */
+}
+
+#rsquare svg {
+    width: 5vw; /* Set the width */
+    height: 5vw; /* Set the height */
+      align-self: center; /* Align the square vertically center */
+}
+
+#menuclose > .closemenubutton {
+
+  text-decoration: none;
+
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-size: 6vw;
+  margin: 0px;
+  pointer-events: auto;
+  transition: opacity 600ms ease;
+  z-index: 10;
+  text-align: center;
+}
+
 
 @keyframes rotate {
   from {
@@ -199,9 +234,6 @@ body.toggled > .icon {
   text-decoration: none;
   padding: 0.5vw 0rem;
   transition: opacity 400ms ease;
-
-
-
 }
 
 #menu-items:hover  > .menu-item {
