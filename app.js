@@ -117,6 +117,7 @@ Array.from(document.getElementsByClassName("menu-item"))
   .forEach((item, index) => {
 
     item.addEventListener('click', function() {
+      console.log(index);
     var menuClose = document.getElementById('rsquaresvg');
     menuClose.style.width ="400%"
 });
