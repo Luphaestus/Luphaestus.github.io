@@ -101,6 +101,7 @@ body.toggled > .icon {
   text-align: center;
 }
 
+
 @keyframes background-pan {
   from {
     background-position: 0% center;
@@ -143,10 +144,8 @@ body.toggled > .icon {
 }
 
 #menuclose {
-  right: 4%;
   position: absolute;
-  top: 2%;
-  scale: 0.5;
+  z-index: 1000;
   font-weight: 400;
   display: flex; /* Set the display property to flex */
   align-items: center; /* Align items vertically in the center */
@@ -154,19 +153,24 @@ body.toggled > .icon {
 
 
 #menuclose #rsquare {
-    margin-left: 4vw; /* Add margin to the left of the <svg> icon */
-}
+    margin-left: 10vw; /* Add margin to the left of the <svg> icon */
+  transition: margin-left 200ms ease-in-out, scale 200ms ease-in-out, tranform 200ms ease-in-out;
 
-#rsquare svg {
-    width: 5vw; /* Set the width */
-    height: 5vw; /* Set the height */
-      align-self: center; /* Align the square vertically center */
+}
+#rsquaresvg {
+    transition: width 2000ms ease-in-out, transform 200ms ease-in-out;
+    position: fixed;
+    width: 4%;
+    top: 7.4%; /* Centering vertically */
+    left: 28%; /* Centering horizontally */
+    transform-origin: center center; /* Center the transform origin */
+    transform: translate(-50%, -50%); /* Adjusted translateY value */
 }
 
 #menuclose > .closemenubutton {
 
   text-decoration: none;
-
+  scale: .5;
   color: white;
   font-family: "Rubik", sans-serif;
   font-size: 6vw;
@@ -220,6 +224,7 @@ body.toggled > .icon {
   left: 10vw;
   z-index: 0;
 }
+
 
 #menu-decorations {
   opacity: 0;

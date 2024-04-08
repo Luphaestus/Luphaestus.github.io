@@ -115,6 +115,11 @@ let iterations = 0
 Array.from(document.getElementsByClassName("menu-item"))
 
   .forEach((item, index) => {
+
+    item.addEventListener('click', function() {
+    var menuClose = document.getElementById('rsquaresvg');
+    menuClose.style.width ="400%"
+});
     item.onmouseover = event => {
       menu.dataset.activeIndex = index;
       const interval = setInterval(() => {
@@ -142,4 +147,7 @@ Array.from(document.getElementsByClassName("menu-item"))
 
 
 
-
+document.querySelector('.icon-tabler-square-rotated').addEventListener('click', function() {
+    var menuClose = document.getElementById('rsquaresvg');
+    menuClose.style.width ="400%"
+});

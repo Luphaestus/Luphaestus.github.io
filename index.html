@@ -17,39 +17,47 @@
 
     <div id="menu">
       <div id="menu-items">
-        <a href="/" data-value="Turorial" class="menu-item">Tutorial</a>
-        <a href="/" data-value="Downloads" class="menu-item">Downloads</a>
-        <a href="/" data-value="About" class="menu-item">About</a>
-        <a href="/" data-value="Links" class="menu-item">Links</a>
+        <p data-value="Turorial" class="menu-item">Tutorial</p>
+        <p data-value="Downloads" class="menu-item">Downloads</p>
+        <p data-value="About" class="menu-item">About</p>
+        <p data-value="Links" class="menu-item">Links</p>
       </div>
       <div id="menu-background-pattern"></div>
       <div id="menu-background-image"></div>
     </div>
 
 
-    <div id="menu-decorations">
-      <h1 id="title" class="name"> VULCAN ROM </h1>
-      <div id="menuclose">
-        <a href="/" data-value="Downloads" class="closemenubutton">CLOSE</a>
-        <div id="rsquare">
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-square-rotated"
-          >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M13.446 2.6l7.955 7.954a2.045 2.045 0 0 1 0 2.892l-7.955 7.955a2.045 2.045 0 0 1 -2.892 0l-7.955 -7.955a2.045 2.045 0 0 1 0 -2.892l7.955 -7.955a2.045 2.045 0 0 1 2.892 0z" />
-          </svg>
-        </div>
-      </div>
+  <div id="menu-decorations">
+  <h1 id="title" class="name">VULCAN ROM</h1>
+  <div id="menuclose">
+    <div id="rsquare">
+      <svg
+        id="rsquaresvg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-square-rotated"
+      >
+        <!-- Define your gradient -->
+        <defs>
+          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+            <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Use the gradient to fill the center of the square -->
+        <path d="M13.446 2.6l7.955 7.954a2.045 2.045 0 0 1 0 2.892l-7.955 7.955a2.045 2.045 0 0 1 -2.892 0l-7.955 -7.955a2.045 2.045 0 0 1 0 -2.892l7.955 -7.955a2.045 2.045 0 0 1 2.892 0z" fill="url(#grad)" />
+      </svg>
     </div>
+  </div>
+</div>
+
+
+
 
     <div class="blob"></div>
     <div class="blur"></div>
