@@ -188,6 +188,7 @@ Array.from(document.getElementsByClassName("menu-item")).forEach((item, index) =
             path.style.fillOpacity = 0;
             path.style.transition = "fill-opacity 0.5s ease";
             path.style.fillOpacity = 1;
+            document.querySelector("#rsquaresvg").style.scale = 1.3;
         }
     });
 
@@ -228,9 +229,6 @@ function resetMenuItems() {
     });
 }
 
-// Reset
-
-
 
 window.addEventListener('resize', scaleSVG);
 document.querySelector('.icon-tabler-square-rotated').addEventListener('click', function () {
@@ -243,5 +241,6 @@ document.querySelector('.icon-tabler-square-rotated').addEventListener('click', 
 
 document.getElementById("menu-items").addEventListener("mouseout", function() {
    if (!inmenu) document.querySelector("#rsquaresvg path").style.fillOpacity = 0;
+    document.querySelector("#rsquaresvg").style.scale = "";
 });
 

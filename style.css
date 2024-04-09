@@ -159,7 +159,7 @@ body.toggled > .icon {
   width: 4vw;
   height: 4vw;
   top: 40%;
-  left: 250%;
+  left: 230%;
   transform: translate(-50%, -50%);
 }
 
@@ -173,6 +173,7 @@ body.toggled > .icon {
   position: relative;
   width: 100%; /* Ensure the parent container has a defined width */
   height: 100%; /* Ensure the parent container has a defined height */
+    transition: scale 200ms ease
 }
 .menuText {
     position: absolute;
