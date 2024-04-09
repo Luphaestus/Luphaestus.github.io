@@ -113,6 +113,7 @@ document.body.onpointermove = event => {
 // Flag to track whether menu is active
 let inmenu = false;
 function scaleSVG() {
+
   if (inmenu) {
     var menuClose = document.getElementById('rsquare');
 
@@ -130,10 +131,20 @@ function scaleSVG() {
 const menu = document.getElementById("menu");
 const letters = "abcdefghijklmnopqrstuvwxyz";
 let iterations = 0;
-
 Array.from(document.getElementsByClassName("menu-item"))
 
   .forEach((item, index) => {
+
+
+    item.addEventListener("mouseover", function() {
+     if (!inmenu)
+     {document.querySelector("#rsquaresvg path").setAttribute("fill", "url(#grad" + (index+1) + ")");
+    var path = document.querySelector("#rsquaresvg path");
+    path.style.fillOpacity = 0;
+    path.style.transition = "fill-opacity 0.5s ease";
+    path.style.fillOpacity = 1;
+    }});
+
 
     item.addEventListener('click', function () {
       console.log(index);
@@ -143,6 +154,7 @@ Array.from(document.getElementsByClassName("menu-item"))
     item.onmouseover = event => {
       menu.dataset.activeIndex = index;
       const interval = setInterval(() => {
+
         event.target.innerText = event.target.innerText.split("")
           .map((letter, index) => {
             if (index < iterations) {
@@ -170,3 +182,8 @@ document.querySelector('.icon-tabler-square-rotated').addEventListener('click', 
   menuClose.style.width = "";
   inmenu = false;
 });
+
+document.getElementById("menu-items").addEventListener("mouseout", function() {
+   if (!inmenu) document.querySelector("#rsquaresvg path").style.fillOpacity = 0;
+});
+
