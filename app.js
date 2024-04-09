@@ -130,49 +130,107 @@ function scaleSVG() {
 // Event listeners for menu items
 const menu = document.getElementById("menu");
 const letters = "abcdefghijklmnopqrstuvwxyz";
-let iterations = 0;
-Array.from(document.getElementsByClassName("menu-item"))
+// let iterations = 0;
+// Array.from(document.getElementsByClassName("menu-item"))
+//   .forEach((item, index) => {
+//
+//
+//     item.addEventListener("mouseover", function() {
+//      if (!inmenu)
+//      {document.querySelector("#rsquaresvg path").setAttribute("fill", "url(#grad" + (index+1) + ")");
+//     var path = document.querySelector("#rsquaresvg path");
+//     path.style.fillOpacity = 0;
+//     path.style.transition = "fill-opacity 0.5s ease";
+//     path.style.fillOpacity = 1;
+//     }});
+//
+//
+//     item.addEventListener('click', function () {
+//       console.log(index);
+//       inmenu = true;
+//       scaleSVG();
+//     });
+//     item.onmouseover = event => {
+//       menu.dataset.activeIndex = index;
+//       const interval = setInterval(() => {
+//
+//         event.target.innerText = event.target.innerText.split("")
+//           .map((letter, index) => {
+//             if (index < iterations) {
+//               return event.target.dataset.value[index];
+//             }
+//             return letters[Math.floor(Math.random() * 26)];
+//           })
+//           .join("");
+//
+//         if (iterations >= event.target.dataset.value.length) {
+//           iterations = 0;
+//           clearInterval(interval);
+//         }
+//
+//         iterations += (1 / 3);
+//       }, 30);
+//     }
+//   })
 
-  .forEach((item, index) => {
+let interval; // Declare interval variable outside the event listener functions
 
+Array.from(document.getElementsByClassName("menu-item")).forEach((item, index) => {
+    item.addEventListener("mouseout", function() {
+   resetMenuItems();
+});
 
     item.addEventListener("mouseover", function() {
-     if (!inmenu)
-     {document.querySelector("#rsquaresvg path").setAttribute("fill", "url(#grad" + (index+1) + ")");
-    var path = document.querySelector("#rsquaresvg path");
-    path.style.fillOpacity = 0;
-    path.style.transition = "fill-opacity 0.5s ease";
-    path.style.fillOpacity = 1;
-    }});
-
+        if (!inmenu) {
+            clearInterval(interval); // Clear interval when moving to a different text item
+            document.querySelector("#rsquaresvg path").setAttribute("fill", "url(#grad" + (index+1) + ")");
+            var path = document.querySelector("#rsquaresvg path");
+            path.style.fillOpacity = 0;
+            path.style.transition = "fill-opacity 0.5s ease";
+            path.style.fillOpacity = 1;
+        }
+    });
 
     item.addEventListener('click', function () {
-      console.log(index);
-      inmenu = true;
-      scaleSVG();
+        console.log(index);
+        inmenu = true;
+        scaleSVG();
     });
+
     item.onmouseover = event => {
-      menu.dataset.activeIndex = index;
-      const interval = setInterval(() => {
+        clearInterval(interval); // Clear interval when moving to a different text item
+        menu.dataset.activeIndex = index;
+        let iterations = 0; // Reset iterations when moving to a different text item
+        interval = setInterval(() => {
+            event.target.innerText = event.target.innerText.split("")
+                .map((letter, index) => {
+                    if (index < iterations) {
+                        return event.target.dataset.value[index];
+                    }
+                    return letters[Math.floor(Math.random() * 26)];
+                })
+                .join("");
 
-        event.target.innerText = event.target.innerText.split("")
-          .map((letter, index) => {
-            if (index < iterations) {
-              return event.target.dataset.value[index];
+            if (iterations >= event.target.dataset.value.length) {
+                iterations = 0;
+                clearInterval(interval);
             }
-            return letters[Math.floor(Math.random() * 26)];
-          })
-          .join("");
 
-        if (iterations >= event.target.dataset.value.length) {
-          iterations = 0;
-          clearInterval(interval);
-        }
-
-        iterations += (1 / 3);
-      }, 30);
+            iterations += (1 / 3);
+        }, 30);
     }
-  })
+});
+
+function resetMenuItems() {
+    document.querySelectorAll('.menu-item').forEach((item, index) => {
+      console.log(index)
+        item.innerText = item.dataset.value;
+    });
+}
+
+// Reset
+
+
 
 window.addEventListener('resize', scaleSVG);
 document.querySelector('.icon-tabler-square-rotated').addEventListener('click', function () {
