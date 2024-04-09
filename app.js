@@ -124,55 +124,13 @@ function scaleSVG() {
     menuClose.style.transition = `width 2000ms ease-in-out, height 2000ms ease-in-out`;
     menuClose.style.width = viewportDiagonal * 2 + "px";
     menuClose.style.height = viewportDiagonal * 2 + "px";
+    menuClose.style.rotate = .0002+"deg"
   }
 }
 
 // Event listeners for menu items
 const menu = document.getElementById("menu");
 const letters = "abcdefghijklmnopqrstuvwxyz";
-// let iterations = 0;
-// Array.from(document.getElementsByClassName("menu-item"))
-//   .forEach((item, index) => {
-//
-//
-//     item.addEventListener("mouseover", function() {
-//      if (!inmenu)
-//      {document.querySelector("#rsquaresvg path").setAttribute("fill", "url(#grad" + (index+1) + ")");
-//     var path = document.querySelector("#rsquaresvg path");
-//     path.style.fillOpacity = 0;
-//     path.style.transition = "fill-opacity 0.5s ease";
-//     path.style.fillOpacity = 1;
-//     }});
-//
-//
-//     item.addEventListener('click', function () {
-//       console.log(index);
-//       inmenu = true;
-//       scaleSVG();
-//     });
-//     item.onmouseover = event => {
-//       menu.dataset.activeIndex = index;
-//       const interval = setInterval(() => {
-//
-//         event.target.innerText = event.target.innerText.split("")
-//           .map((letter, index) => {
-//             if (index < iterations) {
-//               return event.target.dataset.value[index];
-//             }
-//             return letters[Math.floor(Math.random() * 26)];
-//           })
-//           .join("");
-//
-//         if (iterations >= event.target.dataset.value.length) {
-//           iterations = 0;
-//           clearInterval(interval);
-//         }
-//
-//         iterations += (1 / 3);
-//       }, 30);
-//     }
-//   })
-
 let interval; // Declare interval variable outside the event listener functions
 
 Array.from(document.getElementsByClassName("menu-item")).forEach((item, index) => {
@@ -193,7 +151,7 @@ Array.from(document.getElementsByClassName("menu-item")).forEach((item, index) =
     });
 
     item.addEventListener('click', function () {
-        console.log(index);
+        Array.from(document.getElementsByClassName("menucontent"))[index].style.opacity = 1;
         inmenu = true;
         scaleSVG();
     });
@@ -224,7 +182,6 @@ Array.from(document.getElementsByClassName("menu-item")).forEach((item, index) =
 
 function resetMenuItems() {
     document.querySelectorAll('.menu-item').forEach((item, index) => {
-      console.log(index)
         item.innerText = item.dataset.value;
     });
 }
@@ -236,8 +193,24 @@ document.querySelector('.icon-tabler-square-rotated').addEventListener('click', 
   menuClose.style.transition = `width 1000ms ease-in-out, height 1000ms ease-in-out`;
   menuClose.style.height = "";
   menuClose.style.width = "";
-  inmenu = false;
+  menuClose.addEventListener('transitionend', transitionEndHandler);
+      inmenu = false;
+
 });
+
+// Function to be executed once transition finishes
+function transitionEndHandler(event) {
+  if ((event.propertyName === 'width' || event.propertyName === 'height') && !inmenu) {
+    Array.from(document.getElementsByClassName("menucontent")).forEach((item, index) => {
+
+      item.style.opacity = 0;
+
+    });
+    event.target.removeEventListener('transitionend', transitionEndHandler);
+
+
+  }
+}
 
 document.getElementById("menu-items").addEventListener("mouseout", function() {
    if (!inmenu) document.querySelector("#rsquaresvg path").style.fillOpacity = 0;

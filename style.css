@@ -301,6 +301,10 @@ body.toggled > .icon {
   pointer-events: none;
 }
 
+.menucontent {
+  opacity: 0;
+}
+
 #menu-items:hover ~ #menu-background-image {
   background-size: 130vmax;
   opacity: 0.1;
